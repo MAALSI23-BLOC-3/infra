@@ -20,11 +20,48 @@ spec:
         ports:
         - containerPort: 3000
         env:
-        - name: POSTGRES_URL
-          valueFrom: 
-            configMapKeyRef:
-              name: postgres-config
-              key: postgres-url
+        - name: POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-host
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-user
+        - name: POSTGRES_PASSWORDç
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-db
+        - name: ENABLE_CORS
+          value: "true"
+        - name: PORT
+          value: "3000"
+        - name: NODE_ENV
+          value: "production"
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: jwt-secret
+        - name: JWT_REFRESH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: jwt-refresh-secret
+        - name: ACCESS_TOKEN_EXPIRATION
+          value: "1d"
+        - name: REFRESH_TOKEN_EXPIRATION
+          value: "1y"
 ---
 apiVersion: v1
 kind: Service
