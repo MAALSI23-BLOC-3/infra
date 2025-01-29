@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usermanagement-deployment
+  labels:
+    app: usermanagement
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: usermanagement
+  template:
+    metadata:
+      labels:
+        app: usermanagement
+    spec:
+      containers:
+      - name: usermanagement
+        image: ghcr.io/maalsi23-bloc-3/usermanagementms:1ed9e05f95ba44e7e05b3d9e55811eaf20074831
+        ports:
+        - containerPort: 3000
+        env:
+        - name: POSTGRES_URL
+          valueFrom: 
+            configMapKeyRef:
+              name: postgres-config
+              key: postgres-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usermanagement-service
+spec:
+  selector:
+    app: usermanagement
+  ports:
+  -protocol: TCP
+    port: 80
+    targetPort: 3000
