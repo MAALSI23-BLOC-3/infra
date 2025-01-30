@@ -22,55 +22,75 @@ spec:
         env:
         - name: POSTGRES_HOST
           valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: postgres-host
+            configMapKeyRef:
+              name: postgres-config
+              key: postgres-url
+        - name: DATABASE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: postgres-port
         - name: POSTGRES_USER
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: postgres-secret
               key: postgres-user
-        - name: POSTGRES_PASSWORDç
+        - name: POSTGRES_PASSWORD
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: postgres-secret
               key: postgres-password
         - name: POSTGRES_DB
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: postgres-secret
               key: postgres-db
         - name: ENABLE_CORS
-          value: "true"
+          valueFrom:
+            configMapKeyRef: 
+              name: usermanagement-config
+              key: enable-cors
         - name: PORT
-          value: "3000"
+          valueFrom:
+            configMapKeyRef: 
+              name: usermanagement-config
+              key: port
         - name: NODE_ENV
-          value: "production"
-        - name: DATABASE_PORT
-          value: "5432"
+          valueFrom:
+            configMapKeyRef:
+              name: usermanagement-config
+              key: node-env
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: usermanagement-secret
               key: jwt-secret
         - name: JWT_REFRESH_SECRET
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: usermanagement-secret
               key: jwt-refresh-secret
         - name: ACCESS_TOKEN_EXPIRATION
-          value: "1d"
+          valueFrom:
+            configMapKeyRef:
+              name: usermanagement-config
+              key: access-token-expiration
         - name: REFRESH_TOKEN_EXPIRATION
-          value: "1y"
+          valueFrom:
+            configMapKeyRef:
+              name: usermanagement-config
+              key: refresh-token-expiration
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: usermanagement-service
 spec:
+  type: NodePort
   selector:
     app: usermanagement
   ports:
   -protocol: TCP
-    port: 80
+    port: 3000
     targetPort: 3000
+    nodePort: 30000

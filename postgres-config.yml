@@ -5,3 +5,4 @@ metadata:
   namespace: default
 data:
   postgres-url: postgres-service
+  postgres-port: 5432
