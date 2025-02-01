@@ -32,17 +32,17 @@ spec:
               key: postgres-port
         - name: POSTGRES_USER
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: postgres-secret
               key: postgres-user
         - name: POSTGRES_PASSWORD
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: postgres-secret
               key: postgres-password
         - name: POSTGRES_DB
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: postgres-secret
               key: postgres-db
         - name: ENABLE_CORS
@@ -90,7 +90,7 @@ spec:
   selector:
     app: usermanagement
   ports:
-  -protocol: TCP
+  - protocol: TCP
     port: 3000
     targetPort: 3000
     nodePort: 30000

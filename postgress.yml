@@ -42,10 +42,10 @@ metadata:
   name: postgres-service
   labels:
     app: postgres
-  spec:
-    selector:
-      app: postgres
-    ports:
-    -protocol: TCP
-      port: 5432
-      targetPort: 5432
+spec:
+  selector:
+    app: postgres
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432

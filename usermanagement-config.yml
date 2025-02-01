@@ -4,8 +4,8 @@ metadata:
   name: usermanagement-config
   namespace: default
 data:
-  enable-cors: true
-  port: 3000
+  enable-cors: "true"
+  port: "3000"
   node-env: production
   access-token-expiration: 1d
   refresh-token-expiration: 1y
