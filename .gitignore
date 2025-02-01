@@ -1,4 +1,4 @@
 # Ignore secrets files
-*-secret.yml
+*.secret.yml
 *.key
 *.pem
