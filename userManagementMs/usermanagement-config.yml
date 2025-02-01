@@ -2,11 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: usermanagement-config
-  namespace: default
+  # namespace: production
 data:
   enable-cors: "true"
   port: "3000"
-  node-env: production
+  node-env: dev
   access-token-expiration: 1d
   refresh-token-expiration: 1y
-
+  postgres-url: user-postgres.postgres.database.azure.com
+  postgres-port: "5432"

@@ -1,0 +1,4 @@
+# Ignore secrets files
+*.secret
+*.key
+*.pem
