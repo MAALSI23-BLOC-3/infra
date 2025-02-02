@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-deployment
+  # namespace: productsion
+  labels:
+    app: products
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+      - name: products
+        image: ghcr.io/maalsi23-bloc-3/productsms:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: products-config
+              key: postgres-url
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: products-secret
+              key: postgres-db
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: products-secret
+              key: postgres-user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: products-secret
+              key: postgres-password
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: products-config
+              key: node-env
+        - name: PORT
+          valueFrom:
+            configMapKeyRef: 
+              name: products-config
+              key: port
+        - name: ENABLE_CORS
+          valueFrom:
+            configMapKeyRef: 
+              name: products-config
+              key: enable-cors
+        - name: DATABASE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: products-config
+              key: postgres-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-service
+  # namespace: productsion
+spec:
+  selector:
+    app: products
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000

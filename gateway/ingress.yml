@@ -20,6 +20,13 @@ spec:
               name: usermanagement-service
               port:
                 number: 80
+        - path: /products(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: products-service
+              port:
+                number: 80
   tls:
   - hosts: 
     - cube3.caravelabs.tech
