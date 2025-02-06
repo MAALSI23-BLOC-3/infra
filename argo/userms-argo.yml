@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cube3-argo
+  name: user-argo
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/MAALSI23-BLOC-3/infra.git'
     targetRevision: HEAD
-    path: 'productsMS'
+    path: 'userManagementMs'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: 'default'
