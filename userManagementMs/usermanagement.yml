@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: usermanagement-deployment
-  # namespace: production
+  namespace: default
   labels:
     app: usermanagement
 spec:
