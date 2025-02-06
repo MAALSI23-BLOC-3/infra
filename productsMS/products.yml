@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: products-deployment
-  # namespace: productsion
+  namespace: default
   labels:
     app: products
 spec:

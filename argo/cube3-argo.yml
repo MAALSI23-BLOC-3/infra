@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/MAALSI23-BLOC-3/infra.git'
     targetRevision: HEAD
-    path: 'productMS'
+    path: 'productsMS'
   destination:
     server: 'https://kubernetes.default.svc'
   syncPolicy:
