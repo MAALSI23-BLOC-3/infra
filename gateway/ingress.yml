@@ -7,7 +7,8 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
     cert-manager.io/cluster-issuer: cert-issuer
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   rules:
   - host: cube3.caravelabs.tech
@@ -27,7 +28,20 @@ spec:
               name: products-service
               port:
                 number: 80
+  - host: argocd.caravelabs.tech
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: argocd-server
+              port:
+                name: https
   tls:
   - hosts: 
     - cube3.caravelabs.tech
     secretName: cube3-tls
+  - hosts:
+    - argocd.example.com
+    secretName: argocd-server-tls # as expected by argocd-server
