@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: products
-        image: ghcr.io/maalsi23-bloc-3/productsms:3ac7a16262d5b4520ff4e4ae478ee1181c0267a1
+        image: ghcr.io/maalsi23-bloc-3/productsms:87fc43a28d0a8049ad1ad0cdc48e501bde09ad52
         ports:
         - containerPort: 3000
         env:
