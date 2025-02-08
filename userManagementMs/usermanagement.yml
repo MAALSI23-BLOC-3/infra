@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: usermanagement
-        image: ghcr.io/maalsi23-bloc-3/usermanagementms:64ca374b3620c16de9a0ea4768a09565c5965662
+        image: ghcr.io/maalsi23-bloc-3/usermanagementms:b47bca2ec8294de37c28bfeb6cf295ccc3017221
         ports:
         - containerPort: 3000
         env:
