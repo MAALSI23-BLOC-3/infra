@@ -6,7 +6,7 @@ metadata:
   labels:
     app: products
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: products
@@ -20,6 +20,13 @@ spec:
         image: ghcr.io/maalsi23-bloc-3/productsms:87fc43a28d0a8049ad1ad0cdc48e501bde09ad52
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
         env:
         - name: POSTGRES_HOST
           valueFrom:
